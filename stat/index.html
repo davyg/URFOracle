@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title></title>
+	<script language="javascript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript" src="data.js"></script>
+	<style type="text/css">
+    	#placeholder{
+    	    margin-top:20px;
+    	}
+	    .line {
+	        width: 100%;
+	    }
+	    .container {
+	        width: 90%;
+	        height: 20px;
+	        display: inline-block;
+	    }
+	    .label {
+	        width: 10%;
+	        display: inline-block;
+	    }
+	    .data {
+	        height: 10px;
+	    }
+
+	    .data1.good {
+	        background-color: rgb(200,240,200);
+	    }
+	    .data1.bad {
+	        background-color: rgb(240,200,200);
+	    }
+	    .data2 {
+	    	left: 0;
+	    	top: 10px;
+	        background-color: rgb(200,200,240);
+	    }
+	    #top {
+	        background-color: rgb(255,255,255);
+	        position: fixed;
+	        top: 0%;
+	        left: 0%;
+	        width: 100%;
+	        height: 20px;
+	    }
+	    #topcont {
+	        position: absolute;
+	        left: 10%;
+	        width: 90%;
+	        height: 20px;
+	    }
+	    .topdata {
+	        position:absolute;
+	        left: 0%;
+	        display: inline-block;
+	    }
+	    
+	</style>
+</head>
+<body>
+<div id="placeholder">
+</div>
+<div id="top">
+<div id="topcont">
+</div>
+</div>
+
+	<script type="text/javascript">
+        for (var i = 0;i < 100; i+= 10)
+        {
+            var data = $("<div>");
+            data.addClass("topdata");
+            data.css("margin-left", i + "%");
+            data.text(i + "%");
+            $("#topcont").append(data);
+        }
+        for (var i in labels)
+        {
+            var label = $("<div>");
+            label.addClass("label");
+            label.text(labels[i]);
+            label.attr("title", "Win " + data1[i] + "% of its game\nUsed in " + data2[i] + "% of the games")
+            
+            var data1ui = $("<div>");
+            data1ui.addClass("data");
+            data1ui.addClass("data1");
+            data1ui.width(data1[i] + "%");
+            data1ui.attr("title", "Win " + data1[i] + "% of its game")
+            if (data1[i]<50)
+                data1ui.addClass("bad");
+            else
+                data1ui.addClass("good");
+                
+            var data2ui = $("<div>");
+            data2ui.addClass("data");
+            data2ui.addClass("data2");
+            data2ui.width(data2[i] + "%");
+            data2ui.attr("title", "Used in " + data2[i] + "% of the games")
+                
+            var container = $("<div>");
+            container.addClass("container");
+            container.append(data1ui);
+            container.append(data2ui);
+            var line = $("<div>");
+            line.addClass("line");
+            line.append(label);
+            line.append(container);
+            $("#placeholder").append(line);
+        }
+	</script>
+</body>
+</html>
